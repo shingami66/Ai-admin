@@ -1,11 +1,12 @@
+require('dotenv').config();
 const mysql = require('mysql2');
 
-// إنشاء connection pool
+// إنشاء connection pool باستخدام متغيرات البيئة
 const pool = mysql.createPool({
-  host: 'localhost',
-  user: 'root',        // غير هذا حسب إعدادات MySQL عندك
-  password: '',        // ضع كلمة المرور هنا
-  database: 'ai_db',   // اسم قاعدة البيانات الموجودة
+  host: process.env.DB_HOST || 'localhost',
+  user: process.env.DB_USER || 'root',
+  password: process.env.DB_PASSWORD || '',
+  database: process.env.DB_NAME || 'ai_db',
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0
